@@ -1,6 +1,6 @@
-# Collection of (unRAID) userscripts
+# Collection of (unRAID) userScripts and Configs
 
-Here you will find a collection of scripts that are designed to work on unRAID, however there shouldn't be any reason it wouldn't work on any Unix based system. <br>
+Here you will find a collection of scripts and configs that are designed to work on unRAID, however there shouldn't be any reason it wouldn't work on any Unix based system. <br>
 
 However, on unRAID simply ensure you have `UserScripts` installed from the appstore > navigate to the `UserScripts` location within `Settings`> create a new script and then set your cron interval.
 
