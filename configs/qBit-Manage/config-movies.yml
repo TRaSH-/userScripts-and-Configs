@@ -1,0 +1,110 @@
+# This is an example configuration file that documents all the options.
+# It will need to be modified for your specific use case.
+# Please refer to the link below for more details on how to set up the configuration file
+# https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup
+
+# qBittorrent parameters
+qbt:
+  host: qbittorrent-vpn-movies:8080
+  user: admin
+  pass: adminadmin
+settings:
+  force_auto_tmm: false
+  tracker_error_tag: issue
+  ignoreTags_OnUpdate: # When running tag-update function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here.
+    - noHL
+    - issue
+    - cross-seed
+directory:
+  cross_seed: /data/.torrents/movies/.input
+  root_dir: /data/.torrents/movies
+  remote_dir: /data/.torrents/movies
+  recycle_bin: /data/.torrents/movies/.RecycleBin
+  torrents_dir: /qbit_appdata
+cat:
+  movies-hd: /data/.torrents/movies/hd
+  movies-uhd: /data/.torrents/movies/uhd
+  movies: /data/.torrents/movies/
+tracker:
+  beyond-hd:
+    tag: BHD
+  blutopia:
+    tag: Blu
+  hdts:
+    tag: HDT
+  passthepopcorn:
+    tag: PTP
+  privatehd:
+    tag: PHD
+    limit_upload_speed: 1024
+  torrentleech:
+    tag: TL
+    limit_upload_speed: 1024
+  reactor:
+    tag: FL
+    limit_upload_speed: 1024
+  hdbits:
+    tag: HDB
+  morethantv:
+    tag: MTV
+    limit_upload_speed: 1024
+  routing.bgp.technology:
+    tag: IPT
+    limit_upload_speed: 1024
+  tracker.m-team.cc:
+    tag: MTTP
+    limit_upload_speed: 1024
+  ipleak.net:
+    tag: ipleak.net
+  tracker.tleechreload.org:
+    tag: tracker.tleechreload.org
+  async.empirehost.me:
+    tag: async.empirehost.me
+  127.0.0.1.stackoverflow.tech:
+    tag: 127.0.0.1.stackoverflow.tech
+nohardlinks:
+  movies-hd:
+    exclude_tags:
+    cleanup: true
+    max_ratio: 5.0
+    max_seeding_time: 28800
+    limit_upload_speed:
+    min_seeding_time: 0
+  movies-uhd:
+    exclude_tags:
+    cleanup: true
+    max_ratio: 5.0
+    max_seeding_time: 28800
+    limit_upload_speed:
+    min_seeding_time: 0
+recyclebin:
+  enabled: true
+  empty_after_x_days: 7
+  save_torrents: true
+  split_by_category: false
+orphaned:
+  exclude_patterns:
+    - '**/.DS_Store'
+    - '**/Thumbs.db'
+    - '**/@eaDir'
+    - '**/*.!qB'
+
+notifiarr:
+  apikey: notifiar-api-key
+  instance: Movies
+webhooks:
+  error: notifiarr
+  run_start: notifiarr
+  run_end: notifiarr
+  function:
+    cross_seed: notifiarr
+    recheck: notifiarr
+    cat_update: notifiarr
+    tag_update: notifiarr
+    rem_unregistered: notifiarr
+    rem_orphaned: notifiarr
+    tag_nohardlinks: notifiarr
+    empty_recyclebin: notifiarr
+    tag_tracker_error:
+bhd:
+  apikey: bhd-api-key

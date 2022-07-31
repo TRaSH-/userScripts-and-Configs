@@ -1,0 +1,44 @@
+version: "3"
+services:
+  qbitmanage-movies:
+    container_name: qbitmanage-movies
+    entrypoint:
+      - /init
+    environment:
+      - TZ=Europe/Berlin
+      - HOST_CONTAINERNAME=qbitmanage-movies
+      - QBT_REM_UNREGISTERED=True
+      - QBT_TAG_NOHARDLINKS=True
+      - QBT_WIDTH=100
+      - QBT_RECHECK=True
+      - QBT_SKIP_RECYCLE=False
+      - QBT_DRY_RUN=False
+      - PUID=99
+      - UMASK=002
+      - QBT_LOG_LEVEL=INFO
+      - QBT_CROSS_SEED=False
+      - QBT_CAT_UPDATE=True
+      - QBT_TAG_UPDATE=True
+      - PGID=100
+      - QBT_DIVIDER==
+      - QBT_CONFIG=config-movies.yml
+      - QBT_LOGFILE=activity-movies.log
+      - QBT_RUN=False
+      - QBT_SCHEDULE=720
+      - QBT_REM_ORPHANED=True
+    image: cr.hotio.dev/hotio/qbitmanage:nightly
+    ipc: private
+    logging:
+      driver: json-file
+      options:
+        max-file: 1
+        max-size: 50m
+    networks:
+      - skynet
+    volumes:
+      - /mnt/fastdrive/appdata/qbitmanage-movies:/config:rw
+      - /mnt/user/data/.torrents/movies/:/data/.torrents/movies/:rw
+      - /mnt/fastdrive/appdata/qbittorrent-vpn-movies/data/BT_backup/:/qbit_appdata:rw
+networks:
+  skynet:
+    external: true
