@@ -1,0 +1,110 @@
+# This is an example configuration file that documents all the options.
+# It will need to be modified for your specific use case.
+# Please refer to the link below for more details on how to set up the configuration file
+# https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup
+
+# qBittorrent parameters
+qbt:
+  host: qbittorrent-vpn-tv:8080
+  user: admin
+  pass: adminadmin
+settings:
+  force_auto_tmm: false
+  tracker_error_tag: issue
+  ignoreTags_OnUpdate: # When running tag-update function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here.
+    - noHL
+    - issue
+    - cross-seed
+directory:
+  cross_seed: /data/.torrents/tv/.input
+  root_dir: /data/.torrents/tv
+  remote_dir: /data/.torrents/tv
+  recycle_bin: /data/.torrents/tv/.RecycleBin
+  torrents_dir: /qbit_appdata
+cat:
+  tv-hd: /data/.torrents/tv/hd
+  tv-uhd: /data/.torrents/tv/uhd
+  tv-hd.cross-seed: /data/.torrents/tv/hd
+  tv-uhd.cross-seed: /data/.torrents/tv/uhd
+  Sonarr-HD.cross-seed: /data/.torrents/tv/hd
+  Sonarr-UHD.cross-seed: /data/.torrents/tv/uhd
+  tv: /data/.torrents/tv/
+tracker:
+  beyond-hd:
+    tag: BHD
+  blutopia:
+    tag: Blu
+  hdts:
+    tag: HDT
+    limit_upload_speed: 1024
+  passthepopcorn:
+    tag: PTP
+  privatehd:
+    tag: PHD
+    limit_upload_speed: 1024
+  torrentleech:
+    tag: TL
+    limit_upload_speed: 1024
+  reactor:
+    tag: FL
+    limit_upload_speed: 1024
+  hdbits:
+    tag: HDB
+  morethantv:
+    tag: MTV
+    limit_upload_speed: 1024
+  landof.tv:
+    tag: BTN
+  tv-vault:
+    tag: TVV
+  routing.bgp.technology:
+    tag: IPT
+    limit_upload_speed: 1024
+  tracker.tleechreload.org:
+    tag: tracker.tleechreload.org
+nohardlinks:
+  tv-hd:
+    exclude_tags:
+    cleanup: true
+    max_ratio: 5.0
+    max_seeding_time: 43200
+    limit_upload_speed:
+    min_seeding_time: 0
+  tv-uhd:
+    exclude_tags:
+    cleanup: true
+    max_ratio: 5.0
+    max_seeding_time: 43200
+    limit_upload_speed:
+    min_seeding_time: 0
+recyclebin:
+  enabled: true
+  empty_after_x_days: 7
+  save_torrents: true
+  split_by_category: false
+orphaned:
+  exclude_patterns:
+    - '**/.DS_Store'
+    - '**/Thumbs.db'
+    - '**/@eaDir'
+    - '**/*.!qB'
+
+notifiarr:
+  apikey: notifiar-api-key
+  instance: TV
+webhooks:
+  error: notifiarr
+  run_start: notifiarr
+  run_end: notifiarr
+  function:
+    cross_seed: notifiarr
+    recheck: notifiarr
+    cat_update: notifiarr
+    tag_update: notifiarr
+    rem_unregistered: notifiarr
+    rem_orphaned: notifiarr
+    tag_nohardlinks: notifiarr
+    empty_recyclebin: notifiarr
+    tag_tracker_error: notifiarr
+bhd:
+  apikey: bhd-api-key
