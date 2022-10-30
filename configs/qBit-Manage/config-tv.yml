@@ -12,15 +12,16 @@ settings:
   force_auto_tmm: false
   tracker_error_tag: issue
   ignoreTags_OnUpdate: # When running tag-update function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here.
-    - noHL
-    - issue
-    - cross-seed
+  - noHL
+  - issue
+  - cross-seed
 directory:
   cross_seed: /data/.torrents/tv/.input
   root_dir: /data/.torrents/tv
   remote_dir: /data/.torrents/tv
   recycle_bin: /data/.torrents/tv/.RecycleBin
   torrents_dir: /qbit_appdata
+  orphaned_dir: /data/.torrents/tv/orphaned_data
 cat:
   tv-hd: /data/.torrents/tv/hd
   tv-uhd: /data/.torrents/tv/uhd
@@ -29,6 +30,14 @@ cat:
   Sonarr-HD.cross-seed: /data/.torrents/tv/hd
   Sonarr-UHD.cross-seed: /data/.torrents/tv/uhd
   tv: /data/.torrents/tv/
+cat_change:
+  # This moves all the torrents from one category to another category. This executes on --cat-update
+  # WARNING: if the paths are different and Default Torrent Management Mode is set to automatic the files could be moved !!!
+  # <Old Category Name> : <New Category>
+  Sonarr-HD.cross-seed: tv-hd
+  Sonarr-UHD.cross-seed: tv-uhd
+  tv-hd.cross-seed: tv-hd
+  tv-uhd.cross-seed: tv-uhd
 tracker:
   beyond-hd:
     tag: BHD
@@ -44,10 +53,10 @@ tracker:
     limit_upload_speed: 1024
   torrentleech:
     tag: TL
-    limit_upload_speed: 1024
+#    limit_upload_speed: 1024
   reactor:
     tag: FL
-    limit_upload_speed: 1024
+#    limit_upload_speed: 1024
   hdbits:
     tag: HDB
   morethantv:
@@ -61,7 +70,15 @@ tracker:
     tag: IPT
     limit_upload_speed: 1024
   tracker.tleechreload.org:
-    tag: tracker.tleechreload.org
+    tag: TL
+  127.0.0.1.stackoverflow.tech:
+    tag: IPT
+    limit_upload_speed: 1024
+  async.empirehost.me:
+    tag: IPT
+    limit_upload_speed: 1024
+  skipthecommericals.xyz:
+    tag: STC
 nohardlinks:
   tv-hd:
     exclude_tags:
