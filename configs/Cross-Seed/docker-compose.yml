@@ -1,0 +1,35 @@
+version: "3"
+services:
+  Xseed-tv-daemon:
+    command:
+      - daemon
+    container_name: Xseed-tv-daemon
+    entrypoint:
+      - cross-seed
+    environment:
+      - HOST_OS=Unraid
+      - HOST_HOSTNAME=PandorasBox
+      - HOST_CONTAINERNAME=Xseed-tv-daemon
+      - PUID=99
+      - PGID=100
+      - TZ=Europe/Berlin
+    image: ghcr.io/cross-seed/cross-seed:master
+    ipc: private
+    logging:
+      driver: json-file
+      options:
+        max-file: 1
+        max-size: 50m
+    networks:
+      - skynet
+    ports:
+      - 2468:2468/tcp
+    privileged: true
+    user: 99:100
+    volumes:
+      - /mnt/fastdrive/appdata/Xseed-tv-daemon:/config:rw
+      - /mnt/fastdrive/appdata/qbittorrent-vpn-tv/data/BT_backup:/input:rw
+    working_dir: /usr/src/app
+networks:
+  skynet:
+    external: true
