@@ -12,19 +12,32 @@ settings:
   force_auto_tmm: false
   tracker_error_tag: issue
   ignoreTags_OnUpdate: # When running tag-update function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here.
-    - noHL
-    - issue
-    - cross-seed
+  - noHL
+  - issue
+  - cross-seed
 directory:
   cross_seed: /data/.torrents/movies/.input
   root_dir: /data/.torrents/movies
   remote_dir: /data/.torrents/movies
   recycle_bin: /data/.torrents/movies/.RecycleBin
   torrents_dir: /qbit_appdata
+  orphaned_dir: /data/.torrents/movies/orphaned_data
 cat:
   movies-hd: /data/.torrents/movies/hd
   movies-uhd: /data/.torrents/movies/uhd
   movies: /data/.torrents/movies/
+  Radarr-HD.cross-seed: /data/.torrents/movies/hd
+  Radarr-UHD.cross-seed: /data/.torrents/movies/uhd
+  movies-hd.cross-seed: /data/.torrents/movies/hd
+  movies-uhd.cross-seed: /data/.torrents/movies/uhd
+cat_change:
+  # This moves all the torrents from one category to another category. This executes on --cat-update
+  # WARNING: if the paths are different and Default Torrent Management Mode is set to automatic the files could be moved !!!
+  # <Old Category Name> : <New Category>
+  Radarr-HD.cross-seed: movies-hd
+  Radarr-UHD.cross-seed: movies-uhd
+  movies-hd.cross-seed: movies-hd
+  movies-uhd.cross-seed: movies-uhd
 tracker:
   beyond-hd:
     tag: BHD
@@ -39,10 +52,10 @@ tracker:
     limit_upload_speed: 1024
   torrentleech:
     tag: TL
-    limit_upload_speed: 1024
+#    limit_upload_speed: 1024
   reactor:
     tag: FL
-    limit_upload_speed: 1024
+#    limit_upload_speed: 1024
   hdbits:
     tag: HDB
   morethantv:
@@ -57,11 +70,15 @@ tracker:
   ipleak.net:
     tag: ipleak.net
   tracker.tleechreload.org:
-    tag: tracker.tleechreload.org
+    tag: TL
   async.empirehost.me:
-    tag: async.empirehost.me
+    tag: IPT
+    limit_upload_speed: 1024
   127.0.0.1.stackoverflow.tech:
-    tag: 127.0.0.1.stackoverflow.tech
+    tag: IPT
+    limit_upload_speed: 1024
+  skipthetrailers.xyz:
+    tag: STT
 nohardlinks:
   movies-hd:
     exclude_tags:
