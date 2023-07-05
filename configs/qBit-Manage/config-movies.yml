@@ -11,12 +11,14 @@ qbt:
 settings:
   force_auto_tmm: false
   tracker_error_tag: issue
+  nohardlinks_tag: noHL
+  share_limits_tag: ~share_limit
   ignoreTags_OnUpdate: # When running tag-update function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here.
   - noHL
   - issue
   - cross-seed
 directory:
-  cross_seed: /data/.torrents/movies/.input
+  cross_seed: /data/.torrents/movies/.watchfolder
   root_dir: /data/.torrents/movies
   remote_dir: /data/.torrents/movies
   recycle_bin: /data/.torrents/movies/.RecycleBin
@@ -30,6 +32,7 @@ cat:
   Radarr-UHD.cross-seed: /data/.torrents/movies/uhd
   movies-hd.cross-seed: /data/.torrents/movies/hd
   movies-uhd.cross-seed: /data/.torrents/movies/uhd
+  cross-seed: /data/.torrents/movies/cross-seed
 cat_change:
   # This moves all the torrents from one category to another category. This executes on --cat-update
   # WARNING: if the paths are different and Default Torrent Management Mode is set to automatic the files could be moved !!!
@@ -38,6 +41,7 @@ cat_change:
   Radarr-UHD.cross-seed: movies-uhd
   movies-hd.cross-seed: movies-hd
   movies-uhd.cross-seed: movies-uhd
+  cross-seed.cross-seed: cross-seed
 tracker:
   beyond-hd:
     tag: BHD
@@ -49,51 +53,114 @@ tracker:
     tag: PTP
   privatehd:
     tag: PHD
-    limit_upload_speed: 1024
   torrentleech:
     tag: TL
-#    limit_upload_speed: 1024
   reactor:
     tag: FL
-#    limit_upload_speed: 1024
   hdbits:
     tag: HDB
   morethantv:
     tag: MTV
-    limit_upload_speed: 1024
   routing.bgp.technology:
     tag: IPT
-    limit_upload_speed: 1024
   tracker.m-team.cc:
     tag: MTTP
-    limit_upload_speed: 1024
-  ipleak.net:
-    tag: ipleak.net
   tracker.tleechreload.org:
     tag: TL
   async.empirehost.me:
     tag: IPT
-    limit_upload_speed: 1024
   127.0.0.1.stackoverflow.tech:
     tag: IPT
-    limit_upload_speed: 1024
   skipthetrailers.xyz:
     tag: STT
+  www.hawke.uno:
+    tag: HUNO
+  tracker.revolutiontt.me:
+    tag: RTT
+  hawke.uno:
+    tag: HUNO
+  tracker.alpharatio.cc:
+    tag: AR
 nohardlinks:
-  movies-hd:
-    exclude_tags:
-    cleanup: true
-    max_ratio: 5.0
+- movies-hd
+- movies-uhd
+- cross-seed
+share_limits:
+  unlimited-noHL:
+    priority: 1
+    include_any_tags:
+    - BHD
+    - Blu
+    - PTP
+    - HUNO
+    - STT
+    - RTT
+    include_all_tags:
+    - noHL
+    categories:
+    - movies-hd
+    - movies-uhd
+    - cross-seed
+    max_ratio: -1
     max_seeding_time: 28800
-    limit_upload_speed:
-    min_seeding_time: 0
-  movies-uhd:
-    exclude_tags:
     cleanup: true
-    max_ratio: 5.0
+    add_group_to_tag: false
+  unlimited:
+    priority: 2
+    include_any_tags:
+    - BHD
+    - Blu
+    - PTP
+    - HUNO
+    - STT
+    - RTT
+    categories:
+    - movies-hd
+    - movies-uhd
+    - cross-seed
+    max_ratio: -1
+    max_seeding_time: -1
+    limit_upload_speed: -1
+    cleanup: true
+    add_group_to_tag: false
+  limited-noHL:
+    priority: 3
+    include_any_tags:
+    - HDT
+    - PHD
+    - FL
+    - MTTP
+    - TL
+    - IPT
+    include_all_tags:
+    - noHL
+    categories:
+    - movies-hd
+    - movies-uhd
+    - cross-seed
+    max_ratio: 5
     max_seeding_time: 28800
-    limit_upload_speed:
-    min_seeding_time: 0
+    limit_upload_speed: 1024
+    cleanup: true
+    add_group_to_tag: false
+  limited:
+    priority: 4
+    include_any_tags:
+    - HDT
+    - PHD
+    - FL
+    - MTTP
+    - TL
+    - IPT
+    categories:
+    - movies-hd
+    - movies-uhd
+    - cross-seed
+    max_ratio: -1
+    max_seeding_time: -1
+    limit_upload_speed: 1024
+    cleanup: true
+    add_group_to_tag: false
 recyclebin:
   enabled: true
   empty_after_x_days: 7
@@ -101,13 +168,14 @@ recyclebin:
   split_by_category: false
 orphaned:
   exclude_patterns:
-    - '**/.DS_Store'
-    - '**/Thumbs.db'
-    - '**/@eaDir'
-    - '**/*.!qB'
+  - '**/.DS_Store'
+  - '**/Thumbs.db'
+  - '**/@eaDir'
+  - '**/*.!qB'
 
+  empty_after_x_days:
 notifiarr:
-  apikey: notifiar-api-key
+  apikey: 27e670d6-aab1-4695-89df-09542a7e6c6d
   instance: Movies
 webhooks:
   error: notifiarr
@@ -122,6 +190,7 @@ webhooks:
     rem_orphaned: notifiarr
     tag_nohardlinks: notifiarr
     empty_recyclebin: notifiarr
-    tag_tracker_error:
+    tag_tracker_error: notifiarr
+    share_limits:
 bhd:
-  apikey: bhd-api-key
+  apikey: xxx
