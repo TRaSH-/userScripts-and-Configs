@@ -175,7 +175,7 @@ orphaned:
 
   empty_after_x_days:
 notifiarr:
-  apikey: 27e670d6-aab1-4695-89df-09542a7e6c6d
+  apikey: xxx
   instance: Movies
 webhooks:
   error: notifiarr
